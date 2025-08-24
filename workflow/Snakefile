@@ -1,0 +1,23 @@
+rule all:
+    input:
+        'results/metrics.tsv',
+        'results/report.md',
+        'results/manifest.json'
+
+rule prepare:
+    output:
+        touch('results/.prepared')
+    shell:
+        'mkdir -p results && touch results/.prepared'
+
+rule benchmark:
+    input:
+        variants='data/simulated_variants.tsv',
+        truth='data/truth_labels.tsv',
+        prepared='results/.prepared'
+    output:
+        metrics='results/metrics.tsv',
+        report='results/report.md',
+        manifest='results/manifest.json'
+    shell:
+        'python -m src.main'

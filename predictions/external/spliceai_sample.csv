@@ -1,0 +1,6 @@
+variant_id,score,tool
+1:13116:G:A,0.92,SpliceAI
+1:14599:G:A,0.08,SpliceAI
+1:10176:A:AC,0.10,SpliceAI
+1:10352:T:TA,0.85,SpliceAI
+1:10616:C:CG,0.20,SpliceAI

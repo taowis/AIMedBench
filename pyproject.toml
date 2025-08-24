@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rd_eval"
+version = "0.0.1"
+description = "Rare disease AI tool evaluation scaffold"
+authors = [{name="Kaitao Lai"}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["pandas>=2.2","numpy>=1.26","scikit-learn>=1.4","matplotlib>=3.8","pyyaml>=6.0","snakemake>=8.0"]
