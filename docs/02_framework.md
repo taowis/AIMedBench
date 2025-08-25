@@ -1,4 +1,4 @@
-# Evaluation Framework (v0.1)
+# Evaluation Framework (v0.2)
 
 ## Datasets
 - **Synthetic small set** (`data/simulated_variants.tsv`) with seeded labels.
@@ -7,25 +7,47 @@
 ## Variant key
 `variant_id = chrom:pos:ref:alt` (1-based, GRCh38 by default).
 
-## Metrics
+---
+
+## Evaluation Dimensions
+
+### Research setting
 - **Discrimination:** AUROC, AUPRC
-- **Calibration:** Brier score; reliability curve bins
-- **Thresholded:** F1, sensitivity, specificity @ chosen operating points
-- **Safety checks:** false positive rate on benigns; misclassification of VUS; shift tests on simulated noise
+- **Robustness:** performance under domain shift (noise, subsampling, ancestry stratification)
+- **Scalability:** runtime, cost/latency profiling on HPC/GCP
+- **Reproducibility:** deterministic runs, containerized workflows
+
+### Clinical setting
+- **Calibration:** Brier score, reliability curves
+- **Thresholded metrics:** Sensitivity, Specificity, PPV, NPV at clinically meaningful cutoffs
+- **Safety checks:** false positives on benigns, misclassification of VUS
+- **Interpretability:** ability to provide variant/gene-level insights that clinicians can act upon
+- **Provenance:** auditability and clear documentation of results
+
+---
 
 ## Protocol
 1. Validate I/O (schemas & reference build).
 2. Aggregate tool scores by `variant_id` (mean if duplicated per tool).
 3. Compute metrics with 95% CIs (bootstrap).
-4. Plot ROC/PR + calibration.
+4. Plot ROC/PR + calibration curves.
 5. Write `results/metrics.tsv` and `results/report.md`.
+6. Include both research and clinical evaluation summaries.
 
-## Robustness
+---
+
+## Robustness & Fairness
 - **Sub-cohorts:** coding vs non-coding; splice-site vs deep intronic; gene panels
-- **Shift:** add label noise (5–10%), subsample coverage
-- **Fairness:** ancestry-stratified when data available
+- **Shift tests:** add label noise (5–10%), simulate coverage differences
+- **Fairness:** ancestry- and sex-stratified performance where data is available
+
+---
 
 ## Reproducibility
-- Snakemake + pinned env
-- Deterministic seeds
-- Clear provenance in `results/manifest.json`
+- Snakemake workflow with pinned environment (`envs/environment.yml`)
+- Docker/Apptainer container images for portability
+- Clear provenance via auto-generated `results/manifest.json`
+
+---
+
+_Version 0.2 — Updated with Clinical vs Research Evaluation Priorities_
