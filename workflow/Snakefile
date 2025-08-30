@@ -10,11 +10,23 @@ rule prepare:
     shell:
         'mkdir -p results && touch results/.prepared'
 
+TOOL_SOURCES = expand("data/tools/{name}.tsv", name=["SpliceAI","CADD","REVEL"])  # adjust names you have
+
+rule tool_to_prediction:
+    input:
+        variants="data/simulated_variants.tsv",
+        tool_src="data/tools/{name}.tsv"
+    output:
+        "results/predictions/{name}.tsv"
+    script:
+        "workflow/scripts/join_one_tool.py"   # reuse join logic (parametrize by {wildcards.name})
+
 rule benchmark:
     input:
         variants='data/simulated_variants.tsv',
         truth='data/truth_labels.tsv',
-        prepared='results/.prepared'
+        prepared='results/.prepared',
+        code=["src/main.py", "src/utils.py"]
     output:
         metrics='results/metrics.tsv',
         report='results/report.md',
