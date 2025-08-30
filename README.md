@@ -170,6 +170,21 @@ snakemake -R benchmark --cores 1
 
 ---
 
+## Results
+
+### Example snapshot after running `snakemake`:
+
+![AIMedBench metrics snapshot](docs/metrics_snapshot.png)
+
+- `results/metrics.tsv`  
+  Tab-separated metrics per tool with AUROC, AUPRC, Brier, and (if ≥50 variants) bootstrap 95% CIs.
+- `results/report.md`  
+  Markdown report with a metrics table and short summary.
+- `results/manifest.json`  
+  Metadata including runtime, tools, and number of variants.
+
+---
+
 ## Adding Real Tool Predictions
 
 AIMedBench expects **one file per tool** under `results/predictions/` with this schema:
