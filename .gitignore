@@ -9,3 +9,5 @@ results/
 .predictions_cache/
 .snakemake/
 src/rd_eval.egg-info/
+external/
+tmp/
