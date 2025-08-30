@@ -103,8 +103,8 @@ python -m pip install -e .
 snakemake -j 1 --directory . --cores 1
 
 # Option B: Docker
-docker build -t rd-eval:latest .
-docker run --rm -v $PWD:/work -w /work rd-eval:latest   bash -lc "snakemake -j 1 --directory . --cores 1"
+docker build -t aimedbench:latest .
+docker run --rm -v $PWD:/work -w /work aimedbench:latest   bash -lc "snakemake -j 1 --directory . --cores 1"
 ```
 
 Outputs appear in `results/`:
